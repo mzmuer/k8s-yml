@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-master-lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
+    name: master
+  selector:
+    statefulset.kubernetes.io/pod-name: mysql-ss-0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-read-lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3307
+    targetPort: 3306
+    protocol: TCP
+    name: only-read
+  selector:
+    app: mysql
+    

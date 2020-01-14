@@ -11,16 +11,3 @@ spec:
   - port: 3306
     name: mysql
   clusterIP: None
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql-svc-slave
-  labels:
-    app: mysql
-spec:
-  selector:
-    app: mysql
-  ports:
-  - port: 3306
-    name: mysql

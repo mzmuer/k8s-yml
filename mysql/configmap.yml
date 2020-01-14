@@ -15,6 +15,7 @@ data:
     
     [mysqld]
     log-bin
+    binlog_expire_logs_seconds=2592000
     max_connections=10000
     default-time-zone='+8:00'
     character-set-client-handshake=FALSE
