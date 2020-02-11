@@ -54,7 +54,7 @@ spec:
           ordinal=${BASH_REMATCH[1]}
           [[ $ordinal -eq 0 ]] && exit 0
           # Clone data from previous peer.
-          ncat --recv-only mysql-ss-$(($ordinal-1)).mysql-svc-master 3307 | xbstream -x -C /var/lib/mysql
+          ncat --recv-only mysql-ss-$(($ordinal-1)).mysql-svc-master 13306 | xbstream -x -C /var/lib/mysql
           # Prepare the backup.
           xtrabackup --prepare --target-dir=/var/lib/mysql
         volumeMounts:
@@ -103,7 +103,7 @@ spec:
         image: mzmuer/xtrabackup:1.0
         ports:
         - name: xtrabackup
-          containerPort: 3307
+          containerPort: 13306
         command:
         - bash
         - "-c"
@@ -146,7 +146,7 @@ spec:
           fi
 
           # Start a server to send backups when requested by peers.
-          exec ncat --listen --keep-open --send-only --max-conns=1 3307 -c \
+          exec ncat --listen --keep-open --send-only --max-conns=1 13306 -c \
             "xtrabackup --backup --slave-info --stream=xbstream --host=127.0.0.1 --user=root"
         volumeMounts:
         - name: data

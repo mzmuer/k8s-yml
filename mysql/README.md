@@ -9,5 +9,5 @@
 $ kubectl create -f configmap.yml
 $ kubectl create -f storageclass.yml
 $ kubectl create -f service.yml
-$ kubectl create -f statefulclass.yml
+$ kubectl create -f statefulset.yml
 ```
